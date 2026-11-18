@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VIT-AP 3D Campus Map (Unofficial)</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<header id="topbar">
+  <div id="brand">
+    <span id="brand-title">VIT-AP 3D</span>
+    <span id="brand-sub">unofficial student-built campus map</span>
+  </div>
+  <div id="searchbox">
+    <input id="search" type="text" placeholder="Search a place: CB, MH-2, cricket..." autocomplete="off" spellcheck="false">
+    <div id="suggest" class="hidden"></div>
+  </div>
+</header>
+
+<nav id="toolbar">
+  <button id="btn-tour" title="Guided fresher tour">Tour</button>
+  <button id="btn-route" title="Walking route between two places">Route</button>
+  <button id="btn-labels" class="on" title="Show / hide name labels">Labels</button>
+  <button id="btn-time" title="Day / night controls">Time</button>
+  <button id="btn-about" title="About this map">About</button>
+</nav>
+
+<section id="timepanel" class="panel hidden">
+  <div class="panel-title">Time of day (IST)</div>
+  <input id="timeslider" type="range" min="0" max="24" step="0.25" value="12">
+  <div id="timeread">12:00</div>
+  <button id="timelive">Back to live time</button>
+</section>
+
+<section id="routepanel" class="panel hidden">
+  <div class="panel-title">Walking route</div>
+  <label>From</label><select id="route-from"></select>
+  <label>To</label><select id="route-to"></select>
+  <button id="route-go">Show route</button>
+  <div id="route-info"></div>
+</section>
+
+<section id="tourpanel" class="hidden">
+  <div id="tour-caption"></div>
+  <div id="tour-controls">
+    <button id="tour-prev">&#9664; Prev</button>
+    <span id="tour-count"></span>
+    <button id="tour-next">Next &#9654;</button>
+    <button id="tour-exit">Exit</button>
+  </div>
+</section>
+
+<aside id="infocard" class="hidden">
+  <div id="info-name"></div>
+  <div id="info-meta"></div>
+  <button id="info-route" title="Walking route from here">Route from here</button>
+  <button id="info-close" title="Close">&times;</button>
+</aside>
+
+<div id="about" class="modal hidden">
+  <div class="modal-card">
+    <h2>About this map</h2>
+    <p>An <strong>unofficial</strong> 3D map of the VIT-AP University campus in Amaravati, built by a student
+    for fun and orientation. Not affiliated with or endorsed by VIT-AP University.</p>
+    <ul>
+      <li>Building shapes, roads, paths and places come from <strong>OpenStreetMap</strong> (&copy; OpenStreetMap contributors, ODbL).</li>
+      <li>Heights are <strong>approximate</strong> except where mappers recorded floors (CB 11, AB-1/AB-2 3). Blocks are simple extrusions, not architectural models.</li>
+      <li>Walking routes follow <strong>mapped paths only</strong> and assume 5 km/h. Missing or fenced shortcuts are not shown.</li>
+      <li>Sun position is computed from real IST time; windows and lamps light up after dark.</li>
+      <li>Some campus buildings are not yet mapped in OSM, so they may be missing or unnamed here.</li>
+    </ul>
+    <button id="about-close">Close</button>
+  </div>
+</div>
+
+<div id="loading"><div id="loading-text">Building campus&hellip;</div></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
